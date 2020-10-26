@@ -1,0 +1,37 @@
+{
+    "type": "screen",
+    "data": {
+        "id": "home",
+        "content": {
+            "title": "Home"
+        },
+        "options": {},
+        "components": [{
+            "type": "list",
+            "data": {
+                "id": "list",
+                "content": {
+                    "items": [{
+                        "type": "listItem",
+                        "data": {
+                            "id": "ana",
+                            "content": {
+                                "title": "Add new activity",
+                                "indicator": null
+                            },
+                            "selectionAction": {
+                                "type": "navigation",
+                                "data": {
+                                    "transition": "sheet",
+                                    "isNavigationView": true,
+                                    "screenId": "activitiesScreen"
+                                }
+                            },
+                            "options": {}
+                        }
+                    }]
+                }
+            }
+        }]
+    }
+}

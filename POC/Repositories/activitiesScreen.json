@@ -1,0 +1,51 @@
+{
+    "type": "screen",
+    "data": {
+        "id": "activitiesScreen",
+        "content": {
+            "title": "Log activity"
+        },
+        "options": {},
+        "components": [{
+            "type": "list",
+            "data": {
+                "content": {
+                    "items": [{
+                            "type": "listItem",
+                            "data": {
+                                "content": {
+                                    "title": "Sleep",
+                                    "subTitle": "Hours of sleep"
+                                },
+                                "selectionAction": {
+                                    "type": "navigation",
+                                    "data": {
+                                        "transition": "navigationLink",
+                                        "screenId": "addActivityScreen"
+                                    }
+                                }
+                            }
+                        },
+                        {
+                            "type": "listItem",
+                            "data": {
+                                "content": {
+                                    "title": "Alcohol",
+                                    "subTitle": "Number of drinks"
+                                },
+                                "selectionAction": {
+                                    "type": "navigation",
+                                    "data": {
+                                        "transition": "navigationLink",
+                                        "screenId": "addActivityScreen"
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            },
+            "options": {}
+        }]
+    }
+}

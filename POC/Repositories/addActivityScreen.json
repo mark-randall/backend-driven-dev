@@ -1,0 +1,41 @@
+{
+    "type": "screen",
+    "id": "addActivityScreen",
+    "content": {
+        "title": "Activity"
+    },
+    "options": {},
+    "components": [
+        {
+            "type": "list",
+            "content": {
+                "items": [{
+                    "type": "listItem",
+                    "content": {
+                        "title": "Very little",
+                        "subTitle": "Less than 2 hours",
+                        "indicator": null,
+                        "action": {
+                            "type": "dispatch",
+                            "entity": "logActivty/123",
+                            "value": "5"
+                        }
+                    }
+                },{
+                    "type": "listItem",
+                    "content": {
+                        "title": "Full night",
+                        "subTitle": "8 more hours",
+                        "indicator": null,
+                        "action": {
+                            "type": "dispatch",
+                            "entity": "logActivty/123",
+                            "value": "5"
+                        }
+                    }
+                }],
+            },
+            "options": {}
+        }
+    ]
+}
