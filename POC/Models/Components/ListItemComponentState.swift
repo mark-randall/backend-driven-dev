@@ -8,9 +8,9 @@
 struct ListItemComponentState: ComponentStateData {
     
     struct Content: Decodable {
-        let icon: IconComponentModel?
+        let icon: IconState?
         let title: String
-        let subTitle: String? = "Did it work"
+        let subTitle: String?
         let disclosureIndicator: String?
     }
     

@@ -62,10 +62,8 @@ final class ScreenRepository: ScreenRepositoryProtocol {
                 promise(.success(.success(componentState)))
  
             } catch let error as ScreenRespositoryError {
-                print(error)
                 promise(.success(.failure(error)))
             } catch {
-                print(error)
                 promise(.success(.failure(.error(error))))
             }
             

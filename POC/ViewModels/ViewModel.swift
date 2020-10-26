@@ -34,6 +34,8 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
     
     let viewEffect = PassthroughSubject<ViewEffect, Never>()
     
+    // MARK: - Navigation view state
+    
     let isNavigationView: Bool
     let navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode
     
@@ -83,10 +85,6 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
         }).store(in: &subscriptions)
     }
     
-    deinit {
-        print("VM Deinit")
-    }
-    
     // MARK: - Apply ComponentAction
     
     private func apply(_ action: ComponentAction) {
@@ -95,9 +93,11 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
         case .navigation(let showAction):
             switch showAction.transition {
             case .navigationLink:
-                viewEffect.send(.presentNavigationLink(ViewModel(screenId: showAction.screenId, isNavigationView: false)))
+                let vm = ViewModel(screenId: showAction.screenId, isNavigationView: false)
+                viewEffect.send(.presentNavigationLink(vm))
             case .sheet:
-                viewEffect.send(.presentSheet(ViewModel(screenId: showAction.screenId, isNavigationView: true, navigationViewDisplayMode: .inline)))
+                let vm = ViewModel(screenId: showAction.screenId, isNavigationView: true, navigationViewDisplayMode: .inline)
+                viewEffect.send(.presentSheet(vm))
             }
         }
     }

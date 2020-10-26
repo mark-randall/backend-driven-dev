@@ -1,11 +1,11 @@
 //
-//  IconComponentModel.swift
+//  IconState.swift
 //  POC
 //
-//  Created by Mark Randall on 10/23/20.
+//  Created by Mark Randall on 10/26/20.
 //
 
-struct IconComponentModel: Decodable {
+struct IconState: Decodable {
     
     enum Source: String, Decodable {
         case url

@@ -28,10 +28,10 @@
 		029A8DD12543277D00C981A9 /* addActivityScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 029A8DD02543277D00C981A9 /* addActivityScreen.json */; };
 		029A8DD625433E0500C981A9 /* homeScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 029A8DD525433E0500C981A9 /* homeScreen.json */; };
 		029A8DEE2543821200C981A9 /* NavigationAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A8DED2543821200C981A9 /* NavigationAction.swift */; };
-		029A8DFA2543878300C981A9 /* IconComponentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029A8DF92543878300C981A9 /* IconComponentModel.swift */; };
 		02A1695025473B0800A209A5 /* ComponentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1694F25473B0800A209A5 /* ComponentsView.swift */; };
 		02A1695525473DD500A209A5 /* ListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1695425473DD500A209A5 /* ListItemView.swift */; };
 		02A1695D25474CEB00A209A5 /* ComponentDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1695C25474CEB00A209A5 /* ComponentDispatcher.swift */; };
+		02A169672547656100A209A5 /* IconState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169662547656100A209A5 /* IconState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,10 +79,10 @@
 		029A8DD02543277D00C981A9 /* addActivityScreen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = addActivityScreen.json; sourceTree = "<group>"; };
 		029A8DD525433E0500C981A9 /* homeScreen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = homeScreen.json; sourceTree = "<group>"; };
 		029A8DED2543821200C981A9 /* NavigationAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationAction.swift; sourceTree = "<group>"; };
-		029A8DF92543878300C981A9 /* IconComponentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconComponentModel.swift; sourceTree = "<group>"; };
 		02A1694F25473B0800A209A5 /* ComponentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsView.swift; sourceTree = "<group>"; };
 		02A1695425473DD500A209A5 /* ListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemView.swift; sourceTree = "<group>"; };
 		02A1695C25474CEB00A209A5 /* ComponentDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentDispatcher.swift; sourceTree = "<group>"; };
+		02A169662547656100A209A5 /* IconState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,16 +110,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		020ED1A1254110EF00CAA16F /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				027A4A1925409930007CEEE8 /* Component.swift */,
-				029A8DB925424FC500C981A9 /* ComponentModel.swift */,
-				02A1695C25474CEB00A209A5 /* ComponentDispatcher.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		027A49CD2540975C007CEEE8 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +187,8 @@
 		027A4A082540978C007CEEE8 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				029A8DB925424FC500C981A9 /* ComponentModel.swift */,
+				02A1695C25474CEB00A209A5 /* ComponentDispatcher.swift */,
 				027A4A2D25409DB8007CEEE8 /* ViewModel.swift */,
 			);
 			path = ViewModels;
@@ -224,6 +216,7 @@
 		027A4A0B25409801007CEEE8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				029A8DF52543821700C981A9 /* Actions */,
 				027A4A0D2540980C007CEEE8 /* Components */,
 				027A4A0C25409807007CEEE8 /* Data */,
 			);
@@ -240,9 +233,8 @@
 		027A4A0D2540980C007CEEE8 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				020ED1A1254110EF00CAA16F /* Base */,
-				029A8DF52543821700C981A9 /* Actions */,
-				029A8DEC254381D200C981A9 /* SubComponents */,
+				02A169652547654D00A209A5 /* SubComponents */,
+				027A4A1925409930007CEEE8 /* Component.swift */,
 				027A4A412540D423007CEEE8 /* ScreenComponentState.swift */,
 				027A4A1E254099BF007CEEE8 /* ListComponentState.swift */,
 				027A4A2325409BBE007CEEE8 /* ListItemComponentState.swift */,
@@ -274,14 +266,6 @@
 			path = Swift;
 			sourceTree = "<group>";
 		};
-		029A8DEC254381D200C981A9 /* SubComponents */ = {
-			isa = PBXGroup;
-			children = (
-				029A8DF92543878300C981A9 /* IconComponentModel.swift */,
-			);
-			path = SubComponents;
-			sourceTree = "<group>";
-		};
 		029A8DF52543821700C981A9 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,6 +273,14 @@
 				029A8DED2543821200C981A9 /* NavigationAction.swift */,
 			);
 			path = Actions;
+			sourceTree = "<group>";
+		};
+		02A169652547654D00A209A5 /* SubComponents */ = {
+			isa = PBXGroup;
+			children = (
+				02A169662547656100A209A5 /* IconState.swift */,
+			);
+			path = SubComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +421,7 @@
 				029A8DB525424F9E00C981A9 /* ComponentAction.swift in Sources */,
 				027A4A3325409DD2007CEEE8 /* ListView.swift in Sources */,
 				027A4A2425409BBE007CEEE8 /* ListItemComponentState.swift in Sources */,
+				02A169672547656100A209A5 /* IconState.swift in Sources */,
 				027A49DC2540975C007CEEE8 /* ContentView.swift in Sources */,
 				027A4A422540D423007CEEE8 /* ScreenComponentState.swift in Sources */,
 				029A8DEE2543821200C981A9 /* NavigationAction.swift in Sources */,
@@ -437,7 +430,6 @@
 				027A4A3825409DF3007CEEE8 /* ScreenView.swift in Sources */,
 				027A4A1A25409930007CEEE8 /* Component.swift in Sources */,
 				029A8DBA25424FC500C981A9 /* ComponentModel.swift in Sources */,
-				029A8DFA2543878300C981A9 /* IconComponentModel.swift in Sources */,
 				027A49DA2540975C007CEEE8 /* POCApp.swift in Sources */,
 				027A4A1F254099BF007CEEE8 /* ListComponentState.swift in Sources */,
 				027A4A2E25409DB8007CEEE8 /* ViewModel.swift in Sources */,

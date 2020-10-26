@@ -30,8 +30,8 @@
                             "type": "listItem",
                             "data": {
                                 "content": {
-                                    "title": "Alcohol",
-                                    "subTitle": "Number of drinks"
+                                    "title": "Stength exercise",
+                                    "subTitle": null
                                 },
                                 "selectionAction": {
                                     "type": "navigation",
