@@ -9,10 +9,12 @@
         "components": [{
             "type": "list",
             "data": {
+                "id": "list",
                 "content": {
                     "items": [{
                             "type": "listItem",
                             "data": {
+                                "id": "id",
                                 "content": {
                                     "title": "Sleep",
                                     "subTitle": "Hours of sleep"
@@ -29,6 +31,7 @@
                         {
                             "type": "listItem",
                             "data": {
+                                "id": "id",
                                 "content": {
                                     "title": "Stength exercise",
                                     "subTitle": null

@@ -13,9 +13,16 @@ class HomeViewModel: ViewModel {
     
     override func handleAction(_ action: ComponentAction) -> Bool {
         switch action {
-        case .activityLogged:
-            // TODO: How to update UI with logged activity
+        case .activityLogged(let activity):
+            
+            // Append .listItem to list component
+            updateViewStateComponent(withId: "list") { (s: inout ListComponentState) -> Void in
+                let activityView = ComponentState.listItem(ListItemComponentState(content: ListItemComponentState.Content(title: activity.entity)))
+                s.content.items.append(activityView)
+            }
+            
             viewEffect.send(.dismissSheet)
+            
             return false
         default:
             return super.handleAction(action)

@@ -35,6 +35,7 @@
 		02A169742547717A00A209A5 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169732547717A00A209A5 /* HomeViewModel.swift */; };
 		02A1697C2547883000A209A5 /* ComponentModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1697B2547883000A209A5 /* ComponentModelFactory.swift */; };
 		02A169842547A4A000A209A5 /* ActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169832547A4A000A209A5 /* ActivityRepository.swift */; };
+		02A1699025486B5E00A209A5 /* ActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1698F25486B5E00A209A5 /* ActivityLog.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		02A169732547717A00A209A5 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		02A1697B2547883000A209A5 /* ComponentModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentModelFactory.swift; sourceTree = "<group>"; };
 		02A169832547A4A000A209A5 /* ActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRepository.swift; sourceTree = "<group>"; };
+		02A1698F25486B5E00A209A5 /* ActivityLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLog.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +142,8 @@
 			isa = PBXGroup;
 			children = (
 				027A4A0E25409821007CEEE8 /* Extensions */,
-				027A4A0725409783007CEEE8 /* Repositories */,
 				027A4A0B25409801007CEEE8 /* Models */,
+				027A4A0725409783007CEEE8 /* Repositories */,
 				027A4A082540978C007CEEE8 /* ViewModels */,
 				027A4A0925409793007CEEE8 /* Views */,
 				027A49D92540975C007CEEE8 /* POCApp.swift */,
@@ -232,6 +234,7 @@
 		027A4A0C25409807007CEEE8 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				02A1698F25486B5E00A209A5 /* ActivityLog.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				02A1695525473DD500A209A5 /* ListItemView.swift in Sources */,
 				02A1695D25474CEB00A209A5 /* ActionChain.swift in Sources */,
 				02A169742547717A00A209A5 /* HomeViewModel.swift in Sources */,
+				02A1699025486B5E00A209A5 /* ActivityLog.swift in Sources */,
 				029A8DB525424F9E00C981A9 /* ComponentAction.swift in Sources */,
 				027A4A3325409DD2007CEEE8 /* ListView.swift in Sources */,
 				027A4A2425409BBE007CEEE8 /* ListItemComponentState.swift in Sources */,

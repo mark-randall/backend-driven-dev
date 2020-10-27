@@ -14,9 +14,6 @@ struct AlertComponentState: ComponentStateData, Identifiable {
         let message: String?
     }
     
-    let content: Content
-    
-    // MARK: - Identifiable
-    
-    var id: String { UUID().uuidString }
+    var id: String = UUID().uuidString
+    let content: Content 
 }

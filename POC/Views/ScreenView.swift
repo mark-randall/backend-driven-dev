@@ -37,7 +37,11 @@ struct ScreenView: View {
                 NavigationLink(destination: navigationLinkView(viewModel: navigationLinkViewModel), isActive: $navigationLinkIsActive) {
                     EmptyView()
                 }
-                ComponentsView(componentModelFactory: viewModel, components: viewModel.viewState.components)
+                VStack {
+                    ForEach(viewModel.viewState.components) { component in
+                        ComponentView(componentModelFactory: viewModel, component: component)
+                    }
+                }
                 if viewModel.viewState.showActivityIndicator {
                     ProgressView("")
                 }
@@ -73,7 +77,7 @@ struct ScreenView: View {
 
 struct ScreenWrapperView<Content: View>: View {
     
-    private let viewModel: ViewModel // TODO: Update to state?
+    @ObservedObject private(set) var viewModel: ViewModel
     let content: Content
 
     init(viewModel: ViewModel, @ViewBuilder content: () -> Content) {

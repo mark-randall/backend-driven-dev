@@ -14,7 +14,7 @@
                     "items": [{
                         "type": "listItem",
                         "data": {
-                            "id": "ana",
+                            "id": "id",
                             "content": {
                                 "title": "Add new activity",
                                 "indicator": null

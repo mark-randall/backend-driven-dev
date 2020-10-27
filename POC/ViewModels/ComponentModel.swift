@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-class ComponentModel<T>: Identifiable, ComponentModelFactory, ActionChain {
+class ComponentModel<T>: ObservableObject, Identifiable, ComponentModelFactory, ActionChain {
 
     // MARK: - State
     
-    @State private (set) var state: T // TODO: should this be private?
+    @Published private (set) var state: T // TODO: should this be private?
     
     // MARK: - ActionChain
     

@@ -9,10 +9,12 @@
         "components": [{
             "type": "list",
             "data": {
+                "id": "list",
                 "content": {
                     "items": [{
                         "type": "listItem",
                         "data": {
+                            "id": "id",
                             "content": {
                                 "title": "Very little",
                                 "subTitle": "Less than 2 hours"
@@ -29,6 +31,7 @@
                     }, {
                         "type": "listItem",
                         "data": {
+                            "id": "id",
                             "content": {
                                 "title": "Full night",
                                 "subTitle": "8 more hours"

@@ -11,6 +11,7 @@ import Combine
 // MARK: - ScreenRespositoryError
 
 enum ScreenRespositoryError: LocalizedError, CustomStringConvertible {
+    case invalidActionType
     case invalidComponentType
     case notFound
     case invalidFormat
@@ -20,6 +21,8 @@ enum ScreenRespositoryError: LocalizedError, CustomStringConvertible {
     
     var failureReason: String? {
         switch self {
+        case .invalidActionType:
+            return "Invalid component type value"
         case .invalidComponentType:
             return "Invalid component type value"
         case .notFound:

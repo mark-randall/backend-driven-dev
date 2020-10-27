@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListView: View {
     
-    @State var componentModel: ComponentModel<ListComponentState>
+    @ObservedObject var componentModel: ComponentModel<ListComponentState>
     
     var body: some View {
         List {

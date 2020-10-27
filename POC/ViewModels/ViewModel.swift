@@ -82,7 +82,6 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
         switch action {
         
         case .navigation(let showAction):
-            
             switch showAction.transition {
             case .navigationLink:
                 let vm = ViewModel(
@@ -102,19 +101,18 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
 
         case .logActivity(let activity):
             viewState.showActivityIndicator = true
-            activityRepository.logActivity(entity: activity.entity, value: activity.value)
+            activityRepository.logActivity(activity)
                 .receive(on: DispatchQueue.main)
                 .sink(receiveValue: { [weak self] result in
                 
                     switch result {
                     case .failure(let error):
                         print(error)
-                    case .success:
+                    case .success(let activityLog):
                         self?.viewState.showActivityIndicator = false
-                        self?.dispatch(.activityLogged)
+                        self?.dispatch(.activityLogged(activityLog))
                     }
                 }).store(in: &subscriptions)
-
             return false
 
         case .activityLogged:
@@ -125,6 +123,7 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
     // MARK: - ComponentModelFactory
     
     func createComponentModel<T>(state: ComponentState) -> ComponentModel<T> {
+        
         let specializedState: T
         switch state {
         case .list(let stateData):
@@ -140,5 +139,19 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
             componentModelFactory: self,
             nextHandler: self
         )
+    }
+    
+    // MARK: - ViewState modification
+    
+    func updateViewState(_ update: (inout ViewState) -> Void) {
+        update(&viewState)
+    }
+    
+    func updateViewStateComponent<T: ComponentStateData>(withId id: String, _ update: (inout T) -> Void) {
+        guard let componentIndex: Int = viewState.components.firstIndex(where: { $0.id == id }) else { return }
+        guard var componentStateData = viewState.components[componentIndex].rawValue as? T else { return }
+        update(&componentStateData)
+        guard let updatedComponentState = ComponentState(rawValue: componentStateData) else { return }
+        viewState.components[componentIndex] = updatedComponentState
     }
 }

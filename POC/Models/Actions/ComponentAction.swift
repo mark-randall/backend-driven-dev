@@ -11,7 +11,7 @@ enum ComponentAction: Decodable {
     
     case navigation(NavigationAction)
     case logActivity(LogActivityAction)
-    case activityLogged
+    case activityLogged(ActivityLog)
     
     init(from decoder: Decoder) throws {
         
@@ -29,7 +29,7 @@ enum ComponentAction: Decodable {
         case "logActivity":
             self = .logActivity(try container.decode(LogActivityAction.self, forKey: .data))
         default:
-            preconditionFailure("Action type not supported")
+            throw ScreenRespositoryError.invalidActionType
         }
     }
 }

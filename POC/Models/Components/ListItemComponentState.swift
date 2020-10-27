@@ -5,15 +5,18 @@
 //  Created by Mark Randall on 10/21/20.
 //
 
+import Foundation
+
 struct ListItemComponentState: ComponentStateData {
     
     struct Content: Decodable {
-        let icon: IconState?
-        let title: String
-        let subTitle: String?
-        let disclosureIndicator: String?
+        var icon: IconState? = nil
+        var title: String
+        var subTitle: String? = nil
+        var disclosureIndicator: String? = nil
     }
     
-    let content: Content
-    let selectionAction: ComponentAction?
+    var id: String = UUID().uuidString
+    var content: Content
+    var selectionAction: ComponentAction? = nil
 }

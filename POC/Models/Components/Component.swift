@@ -8,7 +8,9 @@
 import Foundation
 import Combine
 
-protocol ComponentStateData: Decodable {} // TODO: should protocol be Identifable
+protocol ComponentStateData: Decodable {
+    var id: String { get }
+}
 
 enum ComponentState: Decodable, Identifiable {
     
@@ -18,7 +20,7 @@ enum ComponentState: Decodable, Identifiable {
      
     // MARK: - Identifiable
     
-    var id: String { String(describing: self) }
+    var id: String { rawValue.id }
     
     // MARK: - Decodable
     
@@ -41,6 +43,32 @@ enum ComponentState: Decodable, Identifiable {
             self = .listItem(try container.decode(ListItemComponentState.self, forKey: .data))
         default:
             preconditionFailure("Action type not supported")
+        }
+    }
+}
+
+// MARK: - RawRepresentable
+
+extension ComponentState: RawRepresentable {
+
+    init?(rawValue: ComponentStateData) {
+        switch rawValue {
+        case let stateData as ScreenComponentState:
+            self = .screen(stateData)
+        case let stateData as ListComponentState:
+            self = .list(stateData)
+        case let stateData as ListItemComponentState:
+            self = .listItem(stateData)
+        default:
+            return nil
+        }
+    }
+
+    var rawValue: ComponentStateData {
+        switch self {
+        case .screen(let state): return state
+        case .list(let state): return state
+        case .listItem(let state): return state
         }
     }
 }

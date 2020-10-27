@@ -5,13 +5,14 @@
 //  Created by Mark Randall on 10/21/20.
 //
 
-import Combine
+import Foundation
 
 struct ListComponentState: ComponentStateData {
     
     struct Content: Decodable {
-        let items: [ComponentState]
+        var items: [ComponentState]
     }
     
-    let content: Content
+    var id: String = UUID().uuidString
+    var content: Content
 }

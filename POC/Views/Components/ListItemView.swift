@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ListItemView: View {
     
-    @State var componentModel: ComponentModel<ListItemComponentState>
+    @ObservedObject var componentModel: ComponentModel<ListItemComponentState>
     
     var body: some View {
         Button(action: {
