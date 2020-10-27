@@ -10,6 +10,8 @@ import Foundation
 enum ComponentAction: Decodable {
     
     case navigation(NavigationAction)
+    case logActivity(LogActivityAction)
+    case activityLogged
     
     init(from decoder: Decoder) throws {
         
@@ -24,6 +26,8 @@ enum ComponentAction: Decodable {
         switch type {
         case "navigation":
             self = .navigation(try container.decode(NavigationAction.self, forKey: .data))
+        case "logActivity":
+            self = .logActivity(try container.decode(LogActivityAction.self, forKey: .data))
         default:
             preconditionFailure("Action type not supported")
         }

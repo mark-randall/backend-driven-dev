@@ -3,7 +3,7 @@
     "data": {
         "id": "addActivityScreen",
         "content": {
-            "title": "Activity"
+            "title": "Sleep"
         },
         "options": {},
         "components": [{
@@ -21,7 +21,7 @@
                                 "type": "logActivity",
                                 "data": {
                                     "entity": "sleep",
-                                    "value": "5"
+                                    "value": 1
                                 }
                             }
 
@@ -37,7 +37,7 @@
                                 "type": "logActivity",
                                 "data": {
                                     "entity": "sleep",
-                                    "value": "5"
+                                    "value": 5
                                 }
 
                             }

@@ -5,8 +5,6 @@
 //  Created by Mark Randall on 10/23/20.
 //
 
-import Foundation
-
 struct NavigationAction: Decodable {
     
     enum Transition: String, Decodable {

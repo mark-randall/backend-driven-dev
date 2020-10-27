@@ -11,7 +11,10 @@ struct ScreenView: View {
     
     // MARK: - ViewModel
     
-    @ObservedObject private(set) var viewModel = ViewModel(screenId: "homeScreen", isNavigationView: true)
+    @ObservedObject private(set) var viewModel: ViewModel = HomeViewModel(
+        screenId: "homeScreen",
+        viewState: ViewModel.ViewState(isNavigationView: true)
+    )
         
     // MARK: - Alert
 
@@ -30,13 +33,15 @@ struct ScreenView: View {
     
     var body: some View {
         ScreenWrapperView(viewModel: viewModel) {
-            if viewModel.viewState.showActivityIndicator {
-                ProgressView("")
+            ZStack {
+                NavigationLink(destination: navigationLinkView(viewModel: navigationLinkViewModel), isActive: $navigationLinkIsActive) {
+                    EmptyView()
+                }
+                ComponentsView(componentModelFactory: viewModel, components: viewModel.viewState.components)
+                if viewModel.viewState.showActivityIndicator {
+                    ProgressView("")
+                }
             }
-            NavigationLink(destination: navigationLinkView(viewModel: navigationLinkViewModel), isActive: $navigationLinkIsActive) {
-                EmptyView()
-            }
-            ComponentsView(componentModelFactory: viewModel, components: viewModel.viewState.components)
         }
         .alert(item: self.$alert) { Alert(title: Text($0.content.title), message: Text($0.content.message ?? "")) }
         .sheet(item: self.$sheetViewModel, content: { vm in ScreenView(viewModel: vm) })
@@ -46,7 +51,10 @@ struct ScreenView: View {
             case .presentNavigationLink(let vm):
                 self.navigationLinkViewModel = vm
                 self.navigationLinkIsActive = true
-            case .presentSheet(let vm): self.sheetViewModel = vm
+            case .presentSheet(let vm):
+                self.sheetViewModel = vm
+            case .dismissSheet:
+                self.sheetViewModel = nil
             }
         }
     }
@@ -65,7 +73,7 @@ struct ScreenView: View {
 
 struct ScreenWrapperView<Content: View>: View {
     
-    private let viewModel: ViewModel
+    private let viewModel: ViewModel // TODO: Update to state?
     let content: Content
 
     init(viewModel: ViewModel, @ViewBuilder content: () -> Content) {
@@ -74,18 +82,15 @@ struct ScreenWrapperView<Content: View>: View {
     }
 
     var body: some View {
-        if viewModel.isNavigationView {
+        if viewModel.viewState.isNavigationView {
             NavigationView {
-                VStack {
-                    content
-                }
-                .navigationBarTitle(viewModel.viewState.title, displayMode: viewModel.navigationViewDisplayMode)
+                content
+                    .navigationBarTitle(viewModel.viewState.title, displayMode: viewModel.viewState.navigationViewDisplayMode)
             }
         } else {
-            VStack {
-                content
-                    .navigationBarTitle(viewModel.viewState.title, displayMode: viewModel.navigationViewDisplayMode)
-            }
+            content
+                .navigationBarTitle(viewModel.viewState.title, displayMode: viewModel.viewState.navigationViewDisplayMode)
+            
         }
     }
 }

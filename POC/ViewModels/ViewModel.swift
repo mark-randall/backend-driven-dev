@@ -9,18 +9,15 @@ import Foundation
 import Combine
 import SwiftUI
 
-protocol ComponentModelFactory {
-    
-    func createComponentModel<T>(state: ComponentState) -> ComponentModel<T>
-}
+class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionChain {
 
-class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
-    
     // MARK: - State and ViewEffect
     
     struct ViewState {
         var showActivityIndicator = false
         var title = ""
+        var isNavigationView: Bool = false
+        var navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic
         var components: [ComponentState] = []
     }
     
@@ -28,39 +25,37 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
         case presentAlert(AlertComponentState)
         case presentNavigationLink(ViewModel)
         case presentSheet(ViewModel)
+        case dismissSheet
     }
     
     @Published private(set) var viewState = ViewState()
     
     let viewEffect = PassthroughSubject<ViewEffect, Never>()
     
-    // MARK: - Navigation view state
+    // MARK: - ActionChain
     
-    let isNavigationView: Bool
-    let navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode
-    
-    
+    weak var nextHandler: ActionReceiver?
+        
     // MARK: - Dependencies
     
     private let screenRepository = ScreenRepository()
     
-    private let dispatcherSubject = PassthroughSubject<ComponentAction, Never>()
-    private lazy var dispatcher: ComponentDispatcher = { [unowned self] in ComponentDispatcher(subject: self.dispatcherSubject) }()
-    
+    private let activityRepository = ActivityRepository()
+        
     private var subscriptions: [AnyCancellable] = []
     
     // MARK: - Init
     
     init(
         screenId: String,
-        isNavigationView: Bool = false,
-        navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic
+        nextHandler: ActionReceiver? = nil,
+        viewState: ViewState = ViewState()
     ) {
-        self.isNavigationView = isNavigationView
-        self.navigationViewDisplayMode = navigationViewDisplayMode
-        
+        self.nextHandler = nextHandler
+        self.viewState = viewState
+   
         // Fetch screen data from repository
-        viewState.showActivityIndicator = true
+        self.viewState.showActivityIndicator = true
         screenRepository.fetchScreen(forId: screenId)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
@@ -69,7 +64,6 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
                 
                 switch result {
                 case .failure(let error):
-                    print(error)
                     let alert = AlertComponentState(content: AlertComponentState.Content(title: error.localizedDescription, message: nil))
                     self.viewEffect.send(.presentAlert(alert))
                 case .success(let componentState):
@@ -79,33 +73,58 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
                     }
                 }
             }).store(in: &subscriptions)
-        
-        dispatcherSubject.sink(receiveValue: { [weak self] action in
-            self?.apply(action)
-        }).store(in: &subscriptions)
     }
     
-    // MARK: - Apply ComponentAction
+    // MARK: - ActionChain
     
-    private func apply(_ action: ComponentAction) {
+    func handleAction(_ action: ComponentAction) -> Bool {
         
         switch action {
+        
         case .navigation(let showAction):
+            
             switch showAction.transition {
             case .navigationLink:
-                let vm = ViewModel(screenId: showAction.screenId, isNavigationView: false)
+                let vm = ViewModel(
+                    screenId: showAction.screenId,
+                    nextHandler: self
+                )
                 viewEffect.send(.presentNavigationLink(vm))
             case .sheet:
-                let vm = ViewModel(screenId: showAction.screenId, isNavigationView: true, navigationViewDisplayMode: .inline)
+                let vm = ViewModel(
+                    screenId: showAction.screenId,
+                    nextHandler: self,
+                    viewState: ViewModel.ViewState(isNavigationView: true, navigationViewDisplayMode: .inline)
+                )
                 viewEffect.send(.presentSheet(vm))
             }
+            return false
+
+        case .logActivity(let activity):
+            viewState.showActivityIndicator = true
+            activityRepository.logActivity(entity: activity.entity, value: activity.value)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: { [weak self] result in
+                
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success:
+                        self?.viewState.showActivityIndicator = false
+                        self?.dispatch(.activityLogged)
+                    }
+                }).store(in: &subscriptions)
+
+            return false
+
+        case .activityLogged:
+            return true
         }
     }
     
     // MARK: - ComponentModelFactory
     
     func createComponentModel<T>(state: ComponentState) -> ComponentModel<T> {
-        
         let specializedState: T
         switch state {
         case .list(let stateData):
@@ -119,7 +138,7 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory {
         return ComponentModel(
             state: specializedState,
             componentModelFactory: self,
-            dispatcher: dispatcher
+            nextHandler: self
         )
     }
 }

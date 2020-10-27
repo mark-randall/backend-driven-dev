@@ -7,21 +7,26 @@
 
 import SwiftUI
 
-class ComponentModel<T>: Identifiable, ComponentModelFactory {
-    
-    private var dispatcher: ComponentDispatcher?
-    private let componentModelFactory: ComponentModelFactory
+class ComponentModel<T>: Identifiable, ComponentModelFactory, ActionChain {
+
+    // MARK: - State
     
     @State private (set) var state: T // TODO: should this be private?
     
-    init(state: T, componentModelFactory: ComponentModelFactory, dispatcher: ComponentDispatcher?) {
+    // MARK: - ActionChain
+    
+    weak var nextHandler: ActionReceiver?
+    
+    // MARK: - Dependencies
+    
+    private let componentModelFactory: ComponentModelFactory
+    
+    // MARK: - Init
+    
+    init(state: T, componentModelFactory: ComponentModelFactory, nextHandler: ActionReceiver?) {
         self.state = state
         self.componentModelFactory = componentModelFactory
-        self.dispatcher = dispatcher
-    }
-    
-    func dispatch(_ action: ComponentAction) {
-        dispatcher?.dispatch(action)
+        self.nextHandler = nextHandler
     }
     
     // MARK: - ComponentModelFactory
