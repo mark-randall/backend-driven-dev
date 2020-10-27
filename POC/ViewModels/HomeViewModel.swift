@@ -7,7 +7,7 @@
 
 import Foundation
 
-class HomeViewModel: ViewModel {
+final class HomeViewModel: ViewModel {
     
     // MARK: - ActionChain
     

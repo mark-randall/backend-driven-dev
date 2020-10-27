@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct AlertComponentState: ComponentStateData, Identifiable {
+struct AlertComponentState: ComponentStateData, Identifiable, Equatable {
     
-    struct Content: Decodable {
+    struct Content: Decodable, Equatable {
         let title: String
         let message: String?
     }

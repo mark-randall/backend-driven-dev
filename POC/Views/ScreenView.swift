@@ -37,11 +37,7 @@ struct ScreenView: View {
                 NavigationLink(destination: navigationLinkView(viewModel: navigationLinkViewModel), isActive: $navigationLinkIsActive) {
                     EmptyView()
                 }
-                VStack {
-                    ForEach(viewModel.viewState.components) { component in
-                        ComponentView(componentModelFactory: viewModel, component: component)
-                    }
-                }
+                ComponentsView(componentModelFactory: viewModel, components: viewModel.viewState.components)
                 if viewModel.viewState.showActivityIndicator {
                     ProgressView("")
                 }

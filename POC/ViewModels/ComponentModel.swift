@@ -11,7 +11,7 @@ class ComponentModel<T>: ObservableObject, Identifiable, ComponentModelFactory, 
 
     // MARK: - State
     
-    @Published private (set) var state: T // TODO: should this be private?
+    @Published private(set) var state: T
     
     // MARK: - ActionChain
     

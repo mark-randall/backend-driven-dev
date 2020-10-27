@@ -12,6 +12,6 @@ struct ScreenComponentState: ComponentStateData {
     }
     
     let id: String
-    let content: Content
-    let components: [ComponentState]
+    var content: Content
+    var components: [ComponentState]
 }

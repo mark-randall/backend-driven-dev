@@ -12,12 +12,16 @@ protocol ComponentStateData: Decodable {
     var id: String { get }
 }
 
-enum ComponentState: Decodable, Identifiable {
+enum ComponentState: Decodable, Identifiable, Equatable {
+    
+    static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
+        String(describing: lhs) == String(describing: rhs)
+    }
     
     case screen(ScreenComponentState)
     case list(ListComponentState)
     case listItem(ListItemComponentState)
-     
+    
     // MARK: - Identifiable
     
     var id: String { rawValue.id }
@@ -25,15 +29,15 @@ enum ComponentState: Decodable, Identifiable {
     // MARK: - Decodable
     
     init(from decoder: Decoder) throws {
-        
+
         enum CodingKeys: String, CodingKey {
             case type
             case data
         }
-        
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(String.self, forKey: .type)
-        
+
         switch type {
         case "screen":
             self = .screen(try container.decode(ScreenComponentState.self, forKey: .data))

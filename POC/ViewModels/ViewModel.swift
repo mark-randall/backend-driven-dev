@@ -9,19 +9,23 @@ import Foundation
 import Combine
 import SwiftUI
 
-class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionChain {
-
-    // MARK: - State and ViewEffect
+class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionChain, Equatable {
     
-    struct ViewState {
-        var showActivityIndicator = false
-        var title = ""
-        var isNavigationView: Bool = false
-        var navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic
-        var components: [ComponentState] = []
+    static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
+        lhs.screenId == rhs.screenId && lhs.viewState == rhs.viewState
     }
     
-    enum ViewEffect {
+    // MARK: - State and ViewEffect
+    
+    struct ViewState: Equatable {
+        var isNavigationView: Bool = false
+        var title = ""
+        var navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic
+        var components: [ComponentState] = []
+        var showActivityIndicator = false
+    }
+    
+    enum ViewEffect: Equatable {
         case presentAlert(AlertComponentState)
         case presentNavigationLink(ViewModel)
         case presentSheet(ViewModel)
@@ -38,25 +42,28 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
         
     // MARK: - Dependencies
     
-    private let screenRepository = ScreenRepository()
-    
-    private let activityRepository = ActivityRepository()
+    private let serviceLocator: ServiceLocatorProtocol
         
     private var subscriptions: [AnyCancellable] = []
     
     // MARK: - Init
     
+    let screenId: String
+    
     init(
         screenId: String,
         nextHandler: ActionReceiver? = nil,
-        viewState: ViewState = ViewState()
+        viewState: ViewState = ViewState(),
+        serviceLocator: ServiceLocatorProtocol = ServiceLocator()
     ) {
+        self.screenId = screenId
+        self.serviceLocator = serviceLocator
         self.nextHandler = nextHandler
         self.viewState = viewState
    
         // Fetch screen data from repository
         self.viewState.showActivityIndicator = true
-        screenRepository.fetchScreen(forId: screenId)
+        serviceLocator.screenRepository.fetchScreen(forId: screenId)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
                 guard let self = self else { return }
@@ -65,12 +72,10 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
                 switch result {
                 case .failure(let error):
                     let alert = AlertComponentState(content: AlertComponentState.Content(title: error.localizedDescription, message: nil))
-                    self.viewEffect.send(.presentAlert(alert))
+                    self.dispatch(.presentAlert(alert))
                 case .success(let componentState):
-                    if case .screen(let screenState) = componentState {
-                        self.viewState.title = screenState.content.title
-                        self.viewState.components = screenState.components
-                    }
+                    guard  case .screen(let screenState) = componentState else { preconditionFailure() }
+                    self.dispatch(.updateScreen(screenState))
                 }
             }).store(in: &subscriptions)
     }
@@ -80,6 +85,11 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
     func handleAction(_ action: ComponentAction) -> Bool {
         
         switch action {
+        
+        case .updateScreen(let screenState):
+            self.viewState.title = screenState.content.title
+            self.viewState.components = screenState.components
+            return false
         
         case .navigation(let showAction):
             switch showAction.transition {
@@ -101,7 +111,7 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
 
         case .logActivity(let activity):
             viewState.showActivityIndicator = true
-            activityRepository.logActivity(activity)
+            serviceLocator.activityRepository.logActivity(activity, date: Date())
                 .receive(on: DispatchQueue.main)
                 .sink(receiveValue: { [weak self] result in
                 
@@ -115,6 +125,10 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
                 }).store(in: &subscriptions)
             return false
 
+        case .presentAlert(let alert):
+            self.viewEffect.send(.presentAlert(alert))
+            return false
+            
         case .activityLogged:
             return true
         }

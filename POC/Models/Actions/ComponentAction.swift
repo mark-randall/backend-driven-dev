@@ -9,9 +9,11 @@ import Foundation
 
 enum ComponentAction: Decodable {
     
+    case updateScreen(ScreenComponentState)
     case navigation(NavigationAction)
     case logActivity(LogActivityAction)
     case activityLogged(ActivityLog)
+    case presentAlert(AlertComponentState)
     
     init(from decoder: Decoder) throws {
         

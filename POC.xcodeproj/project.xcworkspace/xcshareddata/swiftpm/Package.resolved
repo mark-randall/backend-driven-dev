@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Nock",
+        "repositoryURL": "https://git.nerdery.com/scm/sierra/ios.nock.git",
+        "state": {
+          "branch": null,
+          "revision": "f9680a05754b975a8c8a6dbd0ae45424f7604dbd",
+          "version": "0.4.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

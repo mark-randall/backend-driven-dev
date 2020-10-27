@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,6 @@
 		027A49DA2540975C007CEEE8 /* POCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A49D92540975C007CEEE8 /* POCApp.swift */; };
 		027A49DE2540975D007CEEE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027A49DD2540975D007CEEE8 /* Assets.xcassets */; };
 		027A49E12540975D007CEEE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027A49E02540975D007CEEE8 /* Preview Assets.xcassets */; };
-		027A49EC2540975D007CEEE8 /* POCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A49EB2540975D007CEEE8 /* POCTests.swift */; };
 		027A49F72540975D007CEEE8 /* POCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A49F62540975D007CEEE8 /* POCUITests.swift */; };
 		027A4A1A25409930007CEEE8 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A4A1925409930007CEEE8 /* Component.swift */; };
 		027A4A1F254099BF007CEEE8 /* ListComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A4A1E254099BF007CEEE8 /* ListComponentState.swift */; };
@@ -36,6 +35,13 @@
 		02A1697C2547883000A209A5 /* ComponentModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1697B2547883000A209A5 /* ComponentModelFactory.swift */; };
 		02A169842547A4A000A209A5 /* ActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169832547A4A000A209A5 /* ActivityRepository.swift */; };
 		02A1699025486B5E00A209A5 /* ActivityLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1698F25486B5E00A209A5 /* ActivityLog.swift */; };
+		02A169982548989400A209A5 /* ServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169972548989400A209A5 /* ServiceLocator.swift */; };
+		02A1699D2548A07D00A209A5 /* ViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A1699C2548A07D00A209A5 /* ViewModelTests.swift */; };
+		02A169A32548A1FE00A209A5 /* Nock in Frameworks */ = {isa = PBXBuildFile; productRef = 02A169A22548A1FE00A209A5 /* Nock */; };
+		02A169A92548A3B200A209A5 /* XCTAssert+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169A82548A3B200A209A5 /* XCTAssert+Combine.swift */; };
+		02A169B22548B22400A209A5 /* MockScreenRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169B12548B22400A209A5 /* MockScreenRepository.swift */; };
+		02A169BD2548C55100A209A5 /* MockActivityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169BC2548C55100A209A5 /* MockActivityRepository.swift */; };
+		02A169C22548C62300A209A5 /* MockServiceLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A169C12548C62300A209A5 /* MockServiceLocator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +69,6 @@
 		027A49E02540975D007CEEE8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		027A49E22540975D007CEEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		027A49E72540975D007CEEE8 /* POCTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = POCTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		027A49EB2540975D007CEEE8 /* POCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POCTests.swift; sourceTree = "<group>"; };
 		027A49ED2540975D007CEEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		027A49F22540975D007CEEE8 /* POCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = POCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		027A49F62540975D007CEEE8 /* POCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POCUITests.swift; sourceTree = "<group>"; };
@@ -91,6 +96,12 @@
 		02A1697B2547883000A209A5 /* ComponentModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentModelFactory.swift; sourceTree = "<group>"; };
 		02A169832547A4A000A209A5 /* ActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityRepository.swift; sourceTree = "<group>"; };
 		02A1698F25486B5E00A209A5 /* ActivityLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityLog.swift; sourceTree = "<group>"; };
+		02A169972548989400A209A5 /* ServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceLocator.swift; sourceTree = "<group>"; };
+		02A1699C2548A07D00A209A5 /* ViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelTests.swift; sourceTree = "<group>"; };
+		02A169A82548A3B200A209A5 /* XCTAssert+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTAssert+Combine.swift"; sourceTree = "<group>"; };
+		02A169B12548B22400A209A5 /* MockScreenRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockScreenRepository.swift; sourceTree = "<group>"; };
+		02A169BC2548C55100A209A5 /* MockActivityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockActivityRepository.swift; sourceTree = "<group>"; };
+		02A169C12548C62300A209A5 /* MockServiceLocator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockServiceLocator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02A169A32548A1FE00A209A5 /* Nock in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,8 +177,10 @@
 		027A49EA2540975D007CEEE8 /* POCTests */ = {
 			isa = PBXGroup;
 			children = (
-				027A49EB2540975D007CEEE8 /* POCTests.swift */,
+				02A169B02548B20A00A209A5 /* Mocks */,
+				02A169A72548A3B200A209A5 /* Helpers */,
 				027A49ED2540975D007CEEE8 /* Info.plist */,
+				02A1699C2548A07D00A209A5 /* ViewModelTests.swift */,
 			);
 			path = POCTests;
 			sourceTree = "<group>";
@@ -186,6 +200,7 @@
 				02A169882547AACE00A209A5 /* ScreenData */,
 				020ED1992540E91E00CAA16F /* ScreenRepository.swift */,
 				02A169832547A4A000A209A5 /* ActivityRepository.swift */,
+				02A169972548989400A209A5 /* ServiceLocator.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -303,6 +318,24 @@
 			path = ScreenData;
 			sourceTree = "<group>";
 		};
+		02A169A72548A3B200A209A5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				02A169A82548A3B200A209A5 /* XCTAssert+Combine.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		02A169B02548B20A00A209A5 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				02A169B12548B22400A209A5 /* MockScreenRepository.swift */,
+				02A169BC2548C55100A209A5 /* MockActivityRepository.swift */,
+				02A169C12548C62300A209A5 /* MockServiceLocator.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -319,6 +352,9 @@
 			dependencies = (
 			);
 			name = POC;
+			packageProductDependencies = (
+				02A169A22548A1FE00A209A5 /* Nock */,
+			);
 			productName = POC;
 			productReference = 027A49D62540975C007CEEE8 /* POC.app */;
 			productType = "com.apple.product-type.application";
@@ -390,6 +426,9 @@
 				Base,
 			);
 			mainGroup = 027A49CD2540975C007CEEE8;
+			packageReferences = (
+				02A169A12548A1FE00A209A5 /* XCRemoteSwiftPackageReference "ios.nock" */,
+			);
 			productRefGroup = 027A49D72540975C007CEEE8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -445,6 +484,7 @@
 				027A4A3325409DD2007CEEE8 /* ListView.swift in Sources */,
 				027A4A2425409BBE007CEEE8 /* ListItemComponentState.swift in Sources */,
 				02A169672547656100A209A5 /* IconState.swift in Sources */,
+				02A169982548989400A209A5 /* ServiceLocator.swift in Sources */,
 				027A4A422540D423007CEEE8 /* ScreenComponentState.swift in Sources */,
 				029A8DEE2543821200C981A9 /* NavigationAction.swift in Sources */,
 				029A8DB02541DF2700C981A9 /* AlertComponentState.swift in Sources */,
@@ -464,7 +504,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				027A49EC2540975D007CEEE8 /* POCTests.swift in Sources */,
+				02A169A92548A3B200A209A5 /* XCTAssert+Combine.swift in Sources */,
+				02A169B22548B22400A209A5 /* MockScreenRepository.swift in Sources */,
+				02A169C22548C62300A209A5 /* MockServiceLocator.swift in Sources */,
+				02A1699D2548A07D00A209A5 /* ViewModelTests.swift in Sources */,
+				02A169BD2548C55100A209A5 /* MockActivityRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +820,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02A169A12548A1FE00A209A5 /* XCRemoteSwiftPackageReference "ios.nock" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://git.nerdery.com/scm/sierra/ios.nock.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02A169A22548A1FE00A209A5 /* Nock */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02A169A12548A1FE00A209A5 /* XCRemoteSwiftPackageReference "ios.nock" */;
+			productName = Nock;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 027A49CE2540975C007CEEE8 /* Project object */;
 }
