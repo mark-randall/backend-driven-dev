@@ -63,6 +63,11 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
         self.serviceLocator = serviceLocator
         self.nextHandler = nextHandler
         self.viewState = viewState
+        
+        fetchScreen(screenId: screenId)
+    }
+    
+    private func fetchScreen(screenId: String) {
    
         // Fetch screen data from repository
         self.viewState.showActivityIndicator = true

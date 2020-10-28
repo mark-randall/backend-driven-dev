@@ -12,7 +12,7 @@
 		027A49DE2540975D007CEEE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027A49DD2540975D007CEEE8 /* Assets.xcassets */; };
 		027A49E12540975D007CEEE8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 027A49E02540975D007CEEE8 /* Preview Assets.xcassets */; };
 		027A49F72540975D007CEEE8 /* POCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A49F62540975D007CEEE8 /* POCUITests.swift */; };
-		027A4A1A25409930007CEEE8 /* Component.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A4A1925409930007CEEE8 /* Component.swift */; };
+		027A4A1A25409930007CEEE8 /* ComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A4A1925409930007CEEE8 /* ComponentState.swift */; };
 		027A4A1F254099BF007CEEE8 /* ListComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A4A1E254099BF007CEEE8 /* ListComponentState.swift */; };
 		027A4A2425409BBE007CEEE8 /* ListItemComponentState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027A4A2325409BBE007CEEE8 /* ListItemComponentState.swift */; };
 		027A4A2925409D18007CEEE8 /* activitiesScreen.json in Resources */ = {isa = PBXBuildFile; fileRef = 027A4A2825409D18007CEEE8 /* activitiesScreen.json */; };
@@ -78,7 +78,7 @@
 		027A49F22540975D007CEEE8 /* POCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = POCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		027A49F62540975D007CEEE8 /* POCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = POCUITests.swift; sourceTree = "<group>"; };
 		027A49F82540975D007CEEE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		027A4A1925409930007CEEE8 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
+		027A4A1925409930007CEEE8 /* ComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentState.swift; sourceTree = "<group>"; };
 		027A4A1E254099BF007CEEE8 /* ListComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListComponentState.swift; sourceTree = "<group>"; };
 		027A4A2325409BBE007CEEE8 /* ListItemComponentState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemComponentState.swift; sourceTree = "<group>"; };
 		027A4A2825409D18007CEEE8 /* activitiesScreen.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = activitiesScreen.json; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				02A169652547654D00A209A5 /* SubComponents */,
-				027A4A1925409930007CEEE8 /* Component.swift */,
+				027A4A1925409930007CEEE8 /* ComponentState.swift */,
 				02A169C92548D19A00A209A5 /* ButtonComponentState.swift */,
 				027A4A412540D423007CEEE8 /* ScreenComponentState.swift */,
 				027A4A1E254099BF007CEEE8 /* ListComponentState.swift */,
@@ -512,7 +512,7 @@
 				02A1697C2547883000A209A5 /* ComponentModelFactory.swift in Sources */,
 				02A169CA2548D19A00A209A5 /* ButtonComponentState.swift in Sources */,
 				02A1696F2547663300A209A5 /* LogActivityAction.swift in Sources */,
-				027A4A1A25409930007CEEE8 /* Component.swift in Sources */,
+				027A4A1A25409930007CEEE8 /* ComponentState.swift in Sources */,
 				029A8DBA25424FC500C981A9 /* ComponentModel.swift in Sources */,
 				027A49DA2540975C007CEEE8 /* POCApp.swift in Sources */,
 				027A4A1F254099BF007CEEE8 /* ListComponentState.swift in Sources */,

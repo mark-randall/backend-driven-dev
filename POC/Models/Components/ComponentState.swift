@@ -1,5 +1,5 @@
 //
-//  Component.swift
+//  ComponentState.swift
 //  POC
 //
 //  Created by Mark Randall on 10/21/20.
