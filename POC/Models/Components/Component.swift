@@ -13,14 +13,18 @@ protocol ComponentStateData: Decodable {
 }
 
 enum ComponentState: Decodable, Identifiable, Equatable {
+
+    case screen(ScreenComponentState)
+    case list(ListComponentState)
+    case listItem(ListItemComponentState)
+    case button(ButtonComponentState)
+    case textBlock(TextBlockComponentState)
+    
+    // MARK: - Equatable
     
     static func == (lhs: ComponentState, rhs: ComponentState) -> Bool {
         String(describing: lhs) == String(describing: rhs)
     }
-    
-    case screen(ScreenComponentState)
-    case list(ListComponentState)
-    case listItem(ListItemComponentState)
     
     // MARK: - Identifiable
     
@@ -45,6 +49,10 @@ enum ComponentState: Decodable, Identifiable, Equatable {
             self = .list(try container.decode(ListComponentState.self, forKey: .data))
         case "listItem":
             self = .listItem(try container.decode(ListItemComponentState.self, forKey: .data))
+        case "button":
+            self = .button(try container.decode(ButtonComponentState.self, forKey: .data))
+        case "textBlock":
+            self = .textBlock(try container.decode(TextBlockComponentState.self, forKey: .data))
         default:
             preconditionFailure("Action type not supported")
         }
@@ -63,6 +71,10 @@ extension ComponentState: RawRepresentable {
             self = .list(stateData)
         case let stateData as ListItemComponentState:
             self = .listItem(stateData)
+        case let stateData as ButtonComponentState:
+            self = .button(stateData)
+        case let stateData as TextBlockComponentState:
+            self = .textBlock(stateData)
         default:
             return nil
         }
@@ -73,6 +85,8 @@ extension ComponentState: RawRepresentable {
         case .screen(let state): return state
         case .list(let state): return state
         case .listItem(let state): return state
+        case .button(let state): return state
+        case .textBlock(let state): return state
         }
     }
 }

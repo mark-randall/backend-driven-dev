@@ -29,6 +29,11 @@ struct ListItemView: View {
                     }
                 }
                 Spacer()
+                if let value = componentModel.state.content.value {
+                    Text(value)
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                }
                 Image(systemName: "chevron.right")
                     .font(.body)
                     .foregroundColor(.secondary)

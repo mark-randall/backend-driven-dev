@@ -13,6 +13,7 @@ struct ListItemComponentState: ComponentStateData {
         var icon: IconState? = nil
         var title: String
         var subTitle: String? = nil
+        var value: String? = nil
         var disclosureIndicator: String? = nil
     }
     

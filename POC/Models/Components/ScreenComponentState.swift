@@ -9,6 +9,7 @@ struct ScreenComponentState: ComponentStateData {
     
     struct Content: Decodable {
         let title: String
+        var navigationButtonsTrailing: [ComponentState]? = []
     }
     
     let id: String

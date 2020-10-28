@@ -5,7 +5,7 @@
 //  Created by Mark Randall on 10/26/20.
 //
 
-struct IconState: Decodable {
+struct IconState: Decodable, Equatable {
     
     enum Source: String, Decodable {
         case url

@@ -17,7 +17,11 @@ final class HomeViewModel: ViewModel {
             
             // Append .listItem to list component
             updateViewStateComponent(withId: "list") { (s: inout ListComponentState) -> Void in
-                let activityView = ComponentState.listItem(ListItemComponentState(content: ListItemComponentState.Content(title: activity.entity)))
+                let content = ListItemComponentState.Content(
+                    title: activity.entity,
+                    value: "\(activity.value)"
+                )
+                let activityView = ComponentState.listItem(ListItemComponentState(content: content))
                 s.content.items.append(activityView)
             }
             

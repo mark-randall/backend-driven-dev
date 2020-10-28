@@ -3,7 +3,7 @@
     "data": {
         "id": "activitiesScreen",
         "content": {
-            "title": "Activities"
+            "title": "Log activity"
         },
         "options": {},
         "components": [{

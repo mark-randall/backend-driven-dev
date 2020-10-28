@@ -11,6 +11,7 @@ struct ListComponentState: ComponentStateData {
     
     struct Content: Decodable {
         var items: [ComponentState]
+        var emptyState: [ComponentState]? = []
     }
     
     var id: String = UUID().uuidString

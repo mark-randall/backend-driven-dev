@@ -12,10 +12,14 @@ struct ListView: View {
     @ObservedObject var componentModel: ComponentModel<ListComponentState>
     
     var body: some View {
-        List {
-            ForEach(componentModel.state.content.items) { item in
-                ComponentView(componentModelFactory: componentModel, component: item)
+        if !componentModel.state.content.items.isEmpty {
+            List {
+                ForEach(componentModel.state.content.items) { item in
+                    ComponentView(componentModelFactory: componentModel, component: item)
+                }
             }
+        } else if let emptyState = componentModel.state.content.emptyState {
+            ComponentsView(componentModelFactory: componentModel, components: emptyState, spacing: 8.0)
         }
     }
 }

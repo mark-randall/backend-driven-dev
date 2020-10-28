@@ -11,6 +11,8 @@ import SwiftUI
 
 class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionChain, Equatable {
     
+    // MARK: - Equatable
+    
     static func == (lhs: ViewModel, rhs: ViewModel) -> Bool {
         lhs.screenId == rhs.screenId && lhs.viewState == rhs.viewState
     }
@@ -20,6 +22,7 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
     struct ViewState: Equatable {
         var isNavigationView: Bool = false
         var title = ""
+        var navigationViewButtonsTrailing: [ComponentState] = []
         var navigationViewDisplayMode: NavigationBarItem.TitleDisplayMode = .automatic
         var components: [ComponentState] = []
         var showActivityIndicator = false
@@ -66,16 +69,14 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
         serviceLocator.screenRepository.fetchScreen(forId: screenId)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { [weak self] result in
-                guard let self = self else { return }
-                self.viewState.showActivityIndicator = false
-                
+                self?.viewState.showActivityIndicator = false
                 switch result {
                 case .failure(let error):
                     let alert = AlertComponentState(content: AlertComponentState.Content(title: error.localizedDescription, message: nil))
-                    self.dispatch(.presentAlert(alert))
+                    self?.dispatch(.presentAlert(alert))
                 case .success(let componentState):
                     guard  case .screen(let screenState) = componentState else { preconditionFailure() }
-                    self.dispatch(.updateScreen(screenState))
+                    self?.dispatch(.updateScreen(screenState))
                 }
             }).store(in: &subscriptions)
     }
@@ -89,6 +90,7 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
         case .updateScreen(let screenState):
             self.viewState.title = screenState.content.title
             self.viewState.components = screenState.components
+            self.viewState.navigationViewButtonsTrailing = screenState.content.navigationButtonsTrailing ?? []
             return false
         
         case .navigation(let showAction):
@@ -117,7 +119,8 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
                 
                     switch result {
                     case .failure(let error):
-                        print(error)
+                        let alert = AlertComponentState(content: AlertComponentState.Content(title: error.localizedDescription, message: nil))
+                        self?.dispatch(.presentAlert(alert))
                     case .success(let activityLog):
                         self?.viewState.showActivityIndicator = false
                         self?.dispatch(.activityLogged(activityLog))
@@ -137,19 +140,8 @@ class ViewModel: ObservableObject, Identifiable, ComponentModelFactory, ActionCh
     // MARK: - ComponentModelFactory
     
     func createComponentModel<T>(state: ComponentState) -> ComponentModel<T> {
-        
-        let specializedState: T
-        switch state {
-        case .list(let stateData):
-            specializedState = stateData as! T
-        case .listItem(let stateData):
-            specializedState = stateData as! T
-        default:
-            preconditionFailure()
-        }
-        
         return ComponentModel(
-            state: specializedState,
+            state: state.rawValue as! T, // TODO: Consider throwing error
             componentModelFactory: self,
             nextHandler: self
         )

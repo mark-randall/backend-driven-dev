@@ -37,6 +37,7 @@ struct ScreenView: View {
                 NavigationLink(destination: navigationLinkView(viewModel: navigationLinkViewModel), isActive: $navigationLinkIsActive) {
                     EmptyView()
                 }
+                .navigationBarItems(trailing: ComponentsView(componentModelFactory: viewModel, components: viewModel.viewState.navigationViewButtonsTrailing))
                 ComponentsView(componentModelFactory: viewModel, components: viewModel.viewState.components)
                 if viewModel.viewState.showActivityIndicator {
                     ProgressView("")

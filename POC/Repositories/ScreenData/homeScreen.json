@@ -3,7 +3,24 @@
     "data": {
         "id": "home",
         "content": {
-            "title": "Home"
+            "title": "Activities",
+            "navigationButtonsTrailing": [{
+                "type": "button",
+                "data": {
+                    "id": "b1",
+                    "content": {
+                        "title": "Add"
+                    },
+                    "selectionAction": {
+                        "type": "navigation",
+                        "data": {
+                            "transition": "sheet",
+                            "isNavigationView": true,
+                            "screenId": "activitiesScreen"
+                        }
+                    }
+                }
+            }]
         },
         "options": {},
         "components": [{
@@ -11,13 +28,33 @@
             "data": {
                 "id": "list",
                 "content": {
-                    "items": [{
-                        "type": "listItem",
+                    "items": [],
+                    "emptyState": [{
+                        "type": "textBlock",
                         "data": {
-                            "id": "id",
+                            "id": "est",
                             "content": {
-                                "title": "Add new activity",
-                                "indicator": null
+                                "blocks": [{
+                                   "id": "sdfs",
+                                   "text": "Welcome",
+                                   "font": "subheadline"
+                                }, {
+                                    "id": "estb1",
+                                    "text": "Log your first activity",
+                                    "font": "body"
+                                }]
+                            },
+                            "options": {
+                                "spacing": 8
+                            }
+                        }
+                    
+                    },{
+                        "type": "button",
+                        "data": {
+                            "id": "b1",
+                            "content": {
+                                "title": "Add"
                             },
                             "selectionAction": {
                                 "type": "navigation",
@@ -26,8 +63,7 @@
                                     "isNavigationView": true,
                                     "screenId": "activitiesScreen"
                                 }
-                            },
-                            "options": {}
+                            }
                         }
                     }]
                 }
